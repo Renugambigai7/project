@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Student Result Dashboard</title>
+    <link rel="stylesheet" href="../static/dashboard_page/css/style.css">
+</head>
+<body>
+
+    
+    <div class="sidebar">
+        <h2>College Dashboard</h2>
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/bca">BCA Students</a></li>
+            <li><a href="/bsccs">BSc CS Students</a></li>
+            <li><a href="/result">Results</a></li>
+            <li><a href="#">Subjects</a></li>
+            <li><a href="/score">Performance</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="{% url 'index' %}"> Logout</a></li>
+        </ul>
+    </div>
+
+   
+    <div class="main-content">
+        <div class="top-navbar">
+            <h2>College Student Performance</h2>
+        </div>
+
+       
+        <div class="dashboard-container">
+            <h3>BCA Department Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <div class="dashboard-container">
+            <h3>BSc CS Department Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+       
+        <div class="dashboard-container">
+            <h3>Overall College Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BCA</td>
+                        <td>84%</td>
+                        <td>98%</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td>BSc CS</td>
+                        <td>84%</td>
+                        <td>98%</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td>Overall College</td>
+                        <td>83%</td>
+                        <td>97%</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BCA Student List -->
+        <div class="dashboard-container">
+            <h3>BCA Students</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Year</th>
+                        <th>Average Score</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>vijay</td>
+                        <td>2nd Year</td>
+                        <td>84%</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Ajith</td>
+                        <td>3rd Year</td>
+                        <td>84%</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BSc CS Student List -->
+        <div class="dashboard-container">
+            <h3>BSc CS Students</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Year</th>
+                        <th>Average Score</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Virat</td>
+                        <td>2nd Year</td>
+                        <td>84%</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>Dhoni</td>
+                        <td>3rd Year</td>
+                        <td>84%</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Subject-Wise Performance -->
+        <div class="dashboard-container">
+            <h3>Subject Performance (BCA & BSc CS)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Subject</th>
+                        <th>Highest Score</th>
+                        <th>Average Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BCA</td>
+                        <td>Data Structures</td>
+                        <td>96%</td>
+                        <td>84%</td>
+                        <td>100%</td>
+                    </tr>
+                    <tr>
+                        <td>BSc CS</td>
+                        <td>Machine Learning</td>
+                        <td>96%</td>
+                        <td>84%</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recent Results -->
+        <div class="dashboard-container">
+            <h3>Recent Exam Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exam ID</th>
+                        <th>Student</th>
+                        <th>Department</th>
+                        <th>Subject</th>
+                        <th>Score</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#201</td>
+                        <td>Vijay</td>
+                        <td>BCA</td>
+                        <td>Data Structures</td>
+                        <td>94%</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>#202</td>
+                        <td>Dhoni</td>
+                        <td>BSc CS</td>
+                        <td>Machine Learning</td>
+                        <td>94%</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>
