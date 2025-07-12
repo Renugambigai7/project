@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Student Result Dashboard</title>
+    <link rel="stylesheet" href="../static/dashboard_page/css/style.css">
+   
+    <style>
+        .dashboard-container {
+            margin: 20px;
+            padding: 10px;
+        }
+        .year-box {
+            border: 2px solid #333;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            width: 300px;
+            background-color: #f4f4f4;
+        }
+        .year-box h4 {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>College Dashboard</h2>
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/bca">BCA Students</a></li>
+            <li><a href="/bsccs">BSc CS Students</a></li>
+            <li><a href="/result">Results</a></li>
+            <li><a href="#">Subjects</a></li>
+            <li><a href="/score">Performance</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="{% url 'index' %}"> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-navbar">
+            <h2>College Student Performance</h2>
+        </div>
+
+        <!-- BCA Student Performance (Separate Boxes for Each Year) -->
+        <div class="dashboard-container">
+            <h3>BCA Student Performance</h3>
+
+            <div class="year-box">
+                <h4>📘 1st Year</h4>
+                <p><strong>Average Score:</strong> 84%</p>
+                <p><strong>Highest Score:</strong> 96%</p>
+                <p><strong>Pass Percentage:</strong> <span style="color:green;">100%</span></p>
+            </div>
+
+            <div class="year-box">
+                <h4>📗 2nd Year</h4>
+                <p><strong>Average Score:</strong> 84%</p>
+                <p><strong>Highest Score:</strong> 96%</p>
+                <p><strong>Pass Percentage:</strong> <span style="color:green;">100%</span></p>
+            </div>
+
+            <div class="year-box">
+                <h4>📙 3rd Year</h4>
+                <p><strong>Average Score:</strong> 84%</p>
+                <p><strong>Highest Score:</strong> 96%</p>
+                <p><strong>Pass Percentage:</strong> <span style="color:green;">100%</span></p>
+            </div>
+        </div>
+
+        <!-- BCA Department Performance -->
+        <div class="dashboard-container">
+            <h3>BCA Department Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td><span style="color:green;">100%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BSc CS Department Performance -->
+        <div class="dashboard-container">
+            <h3>BSc CS Department Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td><span style="color:green;">100%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Overall Department Performance -->
+        <div class="dashboard-container">
+            <h3>Overall College Performance</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Average Score</th>
+                        <th>Highest Score</th>
+                        <th>Pass Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BCA</td>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td><span style="color:green;">100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>BSc CS</td>
+                        <td>84%</td>
+                        <td>96%</td>
+                        <td><span style="color:green;">100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Overall College</td>
+                        <td>83%</td>
+                        <td>97%</td>
+                        <td><span style="color:green;">100%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    
+
+</body>
+</html>

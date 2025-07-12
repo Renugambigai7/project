@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login Page</title>
+    <link rel="stylesheet" href="../static/login_register_page/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login_form_submission" method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            
+            <div class="input-group">
+                <label for="Student ID">Student ID</label>
+                <input type="text" id="studentID" name="studentID" placeholder="Enter Student ID" required
+                minlength="10" maxlength="15" pattern="[A-Za-z0-9]{10,15}"
+                title="Student ID must be 10 to 15 characters long and contain only letters and numbers">
+            <p class="error-message" id="id-error"></p> 
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" name="password" required>'
+                
+            <p class="error-message" id="password-error"></p> <!-- Error message for password -->
+            </div>
+            <a href="/result" class="btn">Login</a>
+            <p class="register-link">Don't have an account? <a href="/register">Sign Up</a></p>
+        </form>
+    </div>
+</body>
+</html>

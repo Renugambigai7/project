@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Result Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        body { background: linear-gradient #cfc8c8  rgb(90, 90, 90); }
+        .container { max-width: 500px; margin-top: 50px; }
+        .card { box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); }
+        .pass { color: green; font-weight: bold; }
+        .fail, .invalid { color: red; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card p-4">
+        <h4 class="text-center">🎓 Student Result Portal</h4>
+        <div class="mb-3">
+            <label for="studentId" class="form-label">Enter Student ID:</label>
+            <input type="text" id="studentId" class="form-control" placeholder="Student ID">
+        </div>
+        <div class="mb-3">
+            <label for="dob" class="form-label">Enter Date of Birth:</label>
+            <input type="date" id="dob" class="form-control">
+        </div>
+        <button class="btn btn-primary w-100" onclick="fetchResult()">Get Result</button>
+        <p id="errorMessage" class="invalid mt-3 d-none">❌ Invalid Student ID or Date of Birth</p>
+    </div>
+
+    <div class="card p-4 mt-4 d-none" id="resultCard">
+        <h5 class="text-center">Result for <span id="nameDisplay"></span></h5>
+        <p class="text-center text-muted">Student ID: <span id="idDisplay"></span></p>
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr><th>Subject</th><th>Marks</th></tr>
+            </thead>
+            <tbody id="marksTable"></tbody>
+        </table>
+
+        <h5 class="text-center mt-3">Total Percentage: <span id="percentage"></span>%</h5>
+        <h4 class="text-center" id="status"></h4>
+        <button class="btn btn-primary w-100 mt-3" onclick="goToPortal()">Back to Portal</button>
+
+{% url 'index' as url_for_index %}
+    </div>
+</div>
+
+<script>
+    function fetchResult() {
+        const studentId = document.getElementById("studentId").value.trim().toUpperCase();
+        let dob = document.getElementById("dob").value.trim();
+
+        if (!studentId || !dob) {
+            alert("Please enter both Student ID and Date of Birth.");
+            return;
+        }
+
+        // Convert YYYY-MM-DD to DD-MM-YYYY
+        const dobParts = dob.split("-");
+        dob = `${dobParts[2]}-${dobParts[1]}-${dobParts[0]}`;
+
+        // Student database
+        const studentDatabase = {
+            "C23UG345CAP001": { name: "ROSHINI", dob: "31-12-2003", marks: { "23UCAPO1": 100, "23UCA01": 96, "23USTAO1": 80, "23UFTAO1": 73, "23UFENO3": 80 , "23UCASO7": 90 } },
+            "C23UG345CAP002": { name: "SATHYA", dob: "03-05-2003", marks: { "23UCAPO1": 98, "23UCA01": 95, "23USTAO1": 80, "23UFTAO1": 80, "23UFENO3": 90 }, "23UCASO7": 90 },
+            "C23UG345CAP003": { name: "RENUGA", dob: "23-01-2003", marks: { "23UCAPO1": 99, "23UCA01": 95, "23USTAO1": 70, "23UFTAO1": 90, "23UFENO3": 90 }, "23UCASO7": 90 },
+            "C23UG345CAP004": { name: "KAVIYA", dob: "15-08-2003", marks: { "23UCAPO1": 85, "23UCA01": 88, "23USTAO1": 75, "23UFTAO1": 80, "23UFENO3": 70 }, "23UCASO7": 80 },
+            "C23UG345CAP005": { name: "NITHISKA", dob: "10-10-2003", marks: { "23UCAPO1": 90, "23UCA01": 92, "23USTAO1": 85, "23UFTAO1": 88, "23UFENO3": 95 }, "23UCASO7": 90 },
+            "C23UG345CAP006": { name: "PRIYA", dob: "20-11-2003", marks: { "23UCAPO1": 75, "23UCA01": 80, "23USTAO1": 65, "23UFTAO1": 70, "23UFENO3": 60 }, "23UCASO7": 70 },
+            "C23UG345CAP007": { name: "ANBARASI", dob: "05-09-2003", marks: { "23UCAPO1": 95, "23UCA01": 90, "23USTAO1": 80, "23UFTAO1": 85, "23UFENO3": 90 }, "23UCASO7": 95 },
+            "C23UG345CAP008": { name: "MADHUMITHA", dob: "12-02-2003", marks: { "23UCAPO1": 88, "23UCA01": 85, "23USTAO1": 90, "23UFTAO1": 92, "23UFENO3": 95 }, "23UCASO7": 90 },
+            "C23UG345CAP009": { name: "SENDHURA", dob: "02-01-2003", marks: { "23UCAPO1": 80, "23UCA01": 75, "23USTAO1": 70, "23UFTAO1": 65, "23UFENO3": 60 }, "23UCASO7": 70 },
+            "C23UG345CAP010": { name: "DEVI", dob: "18-04-2003", marks: { "23UCAPO1": 90, "23UCA01": 95, "23USTAO1": 85, "23UFTAO1": 80, "23UFENO3": 75 }, "23UCASO7": 80 }
+        };
+
+        let student = studentDatabase[studentId];
+
+        if (!student || student.dob !== dob) {
+            document.getElementById("errorMessage").classList.remove("d-none");
+            document.getElementById("resultCard").classList.add("d-none");
+            return;
+        }
+
+        document.getElementById("errorMessage").classList.add("d-none");
+
+        let totalMarks = 0, failCount = 0, subjectCount = Object.keys(student.marks).length;
+        const marksTable = document.getElementById("marksTable");
+        marksTable.innerHTML = "";
+
+        for (let subject in student.marks) {
+            let marks = student.marks[subject];
+            totalMarks += marks;
+
+            let row = `<tr><td>${subject}</td><td class="${marks >= 40 ? 'pass' : 'fail'}">${marks}</td></tr>`;
+            marksTable.innerHTML += row;
+
+            if (marks < 40) failCount++;
+        }
+
+        let percentage = (totalMarks / (subjectCount * 100)) * 100;
+        document.getElementById("percentage").innerText = percentage.toFixed(2);
+
+        let status = document.getElementById("status");
+        if (failCount > 0) {
+            status.innerText = "Arrear ❌";
+            status.className = "fail";
+        } else {
+            status.innerText = "Pass ✅";
+            status.className = "pass";
+        }
+
+        document.getElementById("nameDisplay").innerText = student.name;
+        document.getElementById("idDisplay").innerText = studentId;
+        document.getElementById("resultCard").classList.remove("d-none");
+
+        // Store result in localStorage
+        let results = JSON.parse(localStorage.getItem("studentResults")) || [];
+        results = results.filter(res => res.studentId !== studentId); // Remove previous result if exists
+        results.push({
+            studentId,
+            name: student.name,
+            percentage: percentage.toFixed(2),
+            status: failCount > 0 ? "Arrear" : "Pass"
+        });
+        localStorage.setItem("studentResults", JSON.stringify(results));
+    }
+
+
+   
+    function goToPortal() {
+        window.location.href = "{{ url_for_index }}";
+    }
+
+
+
+</script>
+
+</body>
+</html>
